@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="surfApp">
+<head>
+    <meta charset="utf8">
+    <meta name="viewport"
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="javascripts/css/bootstrap.min.css">
+
+    <script src="javascripts/lib/angular/angular.js"></script>
+    <script src="javascripts/lib/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="javascripts/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="javascripts/lib/angular-smart-table/dist/smart-table.js"></script>
+    <!-- Modules -->
+    <script src="javascripts/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="javascripts/controllers/MainController.js"></script>
+
+</head>
+<body>
+<div class="main" ng-controller="MainController">
+    <div class="header">
+        <h1>{{ title }}</h1>
+
+        <h2>{{ promo }}</h2>
+    </div>
+    <div class="input-body">
+        <label for="board name">Surfboard Name</label>
+        <input type="text" id="surfboard_name" ng-model="board_name"/>
+
+        <p>
+            <a ng-click="add_surfboard()">add surfboard</a>
+        </p>
+    </div>
+</div>
+
+<div ng-controller="MainController">
+    <button type="button" ng-click="addItem(row)" class="btn btn-sm btn-success">
+        <i class="glyphicon glyphicon-plus">
+            Add table item
+        </i>
+    </button>
+    <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+        <thead>
+        <tr>
+            <th st-sort="MXviewSiteName">Site name</th>
+            <th st-sort="devicedown">Device down</th>
+            <th st-sort="criticalEvent">Critical evnet</th>
+            <th st-sort="warningEvent">Warning event</th>
+        </tr>
+        <tr>
+            <th colspan="5">
+                <input st-search="" class="form-control" placeholder="global search..." type="text"/>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in displayedCollection">
+            <td>{{ row.sitename }}</td>
+            <td>{{ row.devicedown }}</td>
+            <td>{{ row.criticalEvent }}</td>
+            <td>{{ row.warningEvent }}</td>
+            <td>
+                <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+                    <i class="glyphicon glyphicon-remove-circle">
+                    </i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div ng-controller="MainController">
+    <div style="height: 305px">
+        <carousel interval="myInterval">
+            <slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}" style="margin:auto;">
+
+                <div class="carousel-caption">
+                    <h4>Slide {{$index}}</h4>
+
+                    <p>{{slide.text}}</p>
+                </div>
+            </slide>
+        </carousel>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
+        </div>
+        <div class="col-md-6">
+            Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
+            <br/>Enter a negative number or 0 to stop the interval.
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
