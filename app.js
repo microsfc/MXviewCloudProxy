@@ -8,7 +8,7 @@ var http = require('http');
 var https = require('https');
 var fs = require('fs');
 
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 
 var port = 3000; //process.env.PORT ||
 var vhost = 'nodejsapp.local';
@@ -18,8 +18,8 @@ var routes = require('./routes');
 
 var app = express();
 
-var connection = require('./config/database')(mongoose);
-var models = require('./models/models')(connection);
+//var connection = require('./config/database')(mongoose);
+//var models = require('./models/models')(connection);
 
 
 
@@ -41,7 +41,8 @@ var models = require('./models/models')(connection);
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, 'public')));
 
-  require('./routes/route.js')(app, models);
+  //require('./routes/route.js')(app, models);
+  require('./routes/route.js')(app);
 
   app.get('/', routes.index);
   //app.post('/add/surfboard', routes.addSurfBoard);
