@@ -94,7 +94,7 @@ if (app.get('env' == 'production')) {
 
 //app.get('port')
 
-var server = http.createServer(app).listen(3000, function() {
+var server = http.createServer(app).listen(80, function() {
       console.log('Express server listening on port ' + vhost + ":" +server.address().port);
     }
 );
