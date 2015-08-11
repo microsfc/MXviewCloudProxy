@@ -136,7 +136,7 @@ module.exports = {
 
         function start_sending_mqtt(license_data) {
             if(license_data.indexOf(License_Tag) > -1) {
-                var mqtt_client = require('./mqtt_client.js')('192.168.127.13');
+                var mqtt_client = require('./mqtt_client.js')('52.3.105.64');
                 console.log('json result');
                 xmlParser(license_data, function(err, result) {
                     var license_result = JSON.stringify(result);
