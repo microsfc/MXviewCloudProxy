@@ -5,7 +5,20 @@ module.exports = function (models) {
     var Surfboard = models.surfboard;
     //var Surfboard = require('../models/surfboard.js');
 
-    var mqtt    = require('mqtt');
+    /*var AWS = require('aws-sdk');
+    AWS.config.loadFromPath('./config/config.json');
+
+    var sqs = new AWS.SQS();
+
+    sqs.addPermission(params, function (err, data) {
+        if (err) {
+            console.log(err, err.stack); // an error occurred
+        }
+        else {
+            console.log(data);           // successful response
+        }
+
+    });*/
 
     return {
 
@@ -57,7 +70,7 @@ module.exports = function (models) {
 
         subscribeMessage: function(req, res) {
 
-            var client  = mqtt.connect('mqtt://192.168.127.68');
+            var client  = mqtt.connect('mqtt://ec2-52-3-105-64.compute-1.amazonaws.com');
 
             client.on('connect', function () {
                 var mqtopic = require('./mqTopic.js');

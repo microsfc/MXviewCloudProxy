@@ -12,7 +12,7 @@ module.exports = function (models) {
 
 
             var loginoptions = {
-                host: '192.168.127.68',
+                host: req.query.serverip,
                 port: 443,
                 path: '/goform/account/?uid=admin&pwd=&action=login',
                 headers: {'accept': '*/*'},
