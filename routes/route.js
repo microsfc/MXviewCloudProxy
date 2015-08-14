@@ -1,6 +1,6 @@
 module.exports = function(app, models) {
 //module.exports = function(app) {
-    var api = require('./api.js')(models);
+    var api = require('./api.js'); //(models);
     var pushComm = require('./mxview_agent.js')(models);
     var web_api = require('./web_api.js');
 
@@ -10,9 +10,9 @@ module.exports = function(app, models) {
     app.get('/getdeviceresult', web_api.getdevice_summary);
     app.get('/getlinkresult', web_api.getlink_summary);
     app.get('/PushFromMXview', pushComm.getMXviewData);
-    app.get('/update/surfboard', api.updateSurfBoard);
-    app.post('/add/surfboard', api.createSurfboard);
+    //app.get('/update/surfboard', api.updateSurfBoard);
+    //app.post('/add/surfboard', api.createSurfboard);
     app.get('/publish', web_api.getMXview_License);
-    app.get('/getMessage', api.subscribeMessage);
+    app.get('/getMessage', web_api.subscribeMessage);
 
 }

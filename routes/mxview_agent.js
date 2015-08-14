@@ -34,7 +34,7 @@ module.exports = function (models) {
                     hashCode = arr[0].substring(arr[0].indexOf(">") +1, arr[0].length);
                     console.log('hashcode='+hashCode);
                     if(hashCode.indexOf(hashcode_tag) > -1) {
-                        webAPI.getMXview_License(hashCode);
+                        webAPI.getMXview_License(hashCode,req.query.serverip);
                         //gateway.getDynamicUpdateFromMXview(hashCode);
                     }
                 });

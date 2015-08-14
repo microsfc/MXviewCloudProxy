@@ -10,8 +10,15 @@ var web_api_url = require('./web_API_URL.js');
 var topicObj = new mqtopic();
 var web_url = new web_api_url();
 
+var mqtt = require('mqtt');
+var mxviewRegisterData = '';
+
 
 module.exports = {
+
+    get_MXviewRegisterData : function() {
+        return mxviewRegisterData;
+    },
 
     web_api_getlink_summary: function(req, res) {
       console.log('link summary');
@@ -120,10 +127,41 @@ module.exports = {
 
     },
 
-    getMXview_License: function (hashcode) {
+    subscribeMessage: function(req, res) {
+
+        var client  = mqtt.connect('mqtt://ec2-52-3-105-64.compute-1.amazonaws.com');
+
+        client.on('connect', function () {
+            var mqtopic = require('./mqTopic.js');
+            var topicObject = new mqtopic();
+
+            client.subscribe(topicObject.getRegisterMXviewTopic());
+        });
+
+        client.on('message', function (topic, message) {
+            // message is Buffer
+            mxviewRegisterData = message.toString();
+            console.log(message.toString());
+            client.end();
+        });
+
+        client.on('disconnect', function(packet) {
+            console.log('mqtt client is disconnected');
+        });
+
+        client.on('close', function(packet) {
+            console.log('mqtt client is closed');
+        });
+
+        client.on('error', function(packet) {
+            console.log('mqtt client occurs error');
+        });
+    },
+
+    getMXview_License: function (hashcode, serverip) {
 
         var getlicense_options = {
-            host: '192.168.127.68',
+            host: serverip,
             port: 443,
             path: '/goform/license?action=get',
             headers: {'accept': '*/*'},
@@ -136,7 +174,7 @@ module.exports = {
 
         function start_sending_mqtt(license_data) {
             if(license_data.indexOf(License_Tag) > -1) {
-                var mqtt_client = require('./mqtt_client.js')('52.3.105.64');
+                var mqtt_client = require('./mqtt_client.js')('ec2-52-3-105-64.compute-1.amazonaws.com');
                 console.log('json result');
                 xmlParser(license_data, function(err, result) {
                     var license_result = JSON.stringify(result);

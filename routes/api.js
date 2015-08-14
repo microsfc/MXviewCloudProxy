@@ -1,8 +1,11 @@
-module.exports = function (models) {
+//module.exports = function (models) {
+module.exports = function () {
 
-    var User = models.user;
-    var Accessory = models.accessory;
-    var Surfboard = models.surfboard;
+    //var User = models.user;
+    //var Accessory = models.accessory;
+    //var Surfboard = models.surfboard;
+    this.mxviweData = '';
+
     //var Surfboard = require('../models/surfboard.js');
 
     /*var AWS = require('aws-sdk');
@@ -22,7 +25,7 @@ module.exports = function (models) {
 
     return {
 
-        createSurfboard: function(req, res) {
+        /*createSurfboard: function(req, res) {
             var board_name = req.body.boardname;
             var board_type = req.body.boardtype;
             var board_length = req.body.boardlength;
@@ -54,7 +57,7 @@ module.exports = function (models) {
 
         publishMessage: function(req, res) {
 
-            var client  = mqtt.connect('mqtt://192.168.127.68');
+            var client  = mqtt.connect('mqtt://ec2-52-3-105-64.compute-1.amazonaws.com');
 
             client.on('connect', function () {
                 //client.subscribe('presence');
@@ -63,10 +66,12 @@ module.exports = function (models) {
 
             client.on('message', function (topic, message) {
                 // message is Buffer
+                mxviweData = message.toString();
                 console.log(message.toString());
+
                 client.end();
             });
-        },
+        }, */
 
         subscribeMessage: function(req, res) {
 

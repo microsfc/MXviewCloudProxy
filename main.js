@@ -7,6 +7,10 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
+var io = require('socket.io')(http);
+
+// set up our socket server
+require('./socketIO/server_socketio')(io);
 
 var mongoose = require('mongoose');
 
@@ -21,7 +25,8 @@ var app = express();
 var connection = require('./config/database')(mongoose);
 var models = require('./models/models')(connection);
 
-
+// optional - set socket.io logging level
+  //io.set('log level', 1000);
 
   // view engine setup
   //app.set('views', path.join(__dirname, 'views'));
@@ -94,10 +99,16 @@ if (app.get('env' == 'production')) {
 
 //app.get('port')
 
-var server = http.createServer(app).listen(8080, function() {
+/*var server = http.createServer(app).listen(8080, function() {
       console.log('Express server listening on port ' + vhost + ":" +server.address().port);
     }
-);
+);*/
+
+var server = http.createServer(app);
+
+io = io.listen(server);
+
+server.listen(8080);
 
 /*var options = {
    key:  fs.readFileSync('config/moxa.key'),

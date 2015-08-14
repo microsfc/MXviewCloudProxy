@@ -1,4 +1,4 @@
-app.controller('MainController', ['$scope', '$http', function($scope, $http) {
+app.controller('MainController', ['$scope', '$http', 'webSocket', function($scope, $http, webSocket) {
     $scope.title = 'This Month\'s Bestsellers';
     $scope.promo = "The most popular surfboard this month";
 
@@ -8,6 +8,24 @@ app.controller('MainController', ['$scope', '$http', function($scope, $http) {
     var criticalEvent = [10,5,1];
     var warningEvent = [3,5,1];
     var id = 0;
+
+    //chatSocket.connect('http://localhost:8080');
+
+    webSocket.on('connect', function(){
+        $scope.title = 'connected';
+    });
+
+    webSocket.on('user connected', function(msg){
+        $scope.promo = msg;
+    });
+
+    webSocket.on('mxviewcloud dashbaord', function(msg){
+        $scope.promo = msg;
+    });
+
+    //socket.on('chat message', function(msg){
+      //  $('#messages').append($('<li>').text(msg));
+    //});
 
     function generateItem(id) {
         var sitename = MXviewSiteName[id];
