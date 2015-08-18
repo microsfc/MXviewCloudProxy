@@ -10,10 +10,12 @@
     "angular": "^1.4.3",
     "aws-sdk": "^2.1.44",
     "body-parser": "~1.12.0",
+    "browserify": "^11.0.1",
     "cookie-parser": "~1.3.4",
     "debug": "~2.1.1",
     "ejs": "^2.3.2",
     "express": "^4.12.4",
+    "gulp-concat": "^2.6.0",
     "jade": "~1.9.2",
     "moment": "^2.10.3",
     "mongoose": "^4.0.6",
@@ -26,6 +28,15 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
     "gulp-shell": "^0.4.2"
+  },
+  "browser": {
+    "angular": "./public/javascripts/lib/angular/angular.js",
+    "ui_bootstrap": "./public/javascripts/lib/angular-bootstrap/ui-bootstrap.js",
+    "ui_bootstrap_carousel": "./public/javascripts/lib/angular-bootstrap/ui-bootstrap-tpls.js",
+    "smart-table": "./public/javascripts/lib/angular-smart-table/dist/smart-table.js",
+    "socket-io-client": "./public/javascripts/lib/socket.io-client/socket.io.js",
+    "angular-socket-io": "./public/javascripts/lib/angular-socket-io/socket.js"
   }
 }

@@ -1,6 +1,10 @@
 'use strict';
+//require('../lib/socket.io-client/socket.io.js');
+//require('../lib/angular-socket-io/socket.js');
+require('angular-socket-io');
+
 angular.module('surfApp')
-.factory('webSocket', function (socketFactory) {
+.factory('socketio', function (socketFactory) {
       var socket = socketFactory();
       socket.forward('broadcast');
       return socket;

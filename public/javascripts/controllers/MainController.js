@@ -1,4 +1,11 @@
-app.controller('MainController', ['$scope', '$http', 'webSocket', function($scope, $http, webSocket) {
+require('angular');
+require('smart-table');
+require('../service/socket.js');
+
+var app = angular.module('surfApp');
+
+
+app.controller('MainController', ['$scope', '$http', 'socketio', function($scope, $http, socketio) {
     $scope.title = 'This Month\'s Bestsellers';
     $scope.promo = "The most popular surfboard this month";
 
@@ -11,15 +18,15 @@ app.controller('MainController', ['$scope', '$http', 'webSocket', function($scop
 
     //chatSocket.connect('http://localhost:8080');
 
-    webSocket.on('connect', function(){
+    socketio.on('connect', function(){
         $scope.title = 'connected';
     });
 
-    webSocket.on('user connected', function(msg){
+    socketio.on('user connected', function(msg){
         $scope.promo = msg;
     });
 
-    webSocket.on('mxviewcloud dashbaord', function(msg){
+    socketio.on('mxviewcloud dashbaord', function(msg){
         $scope.promo = msg;
     });
 
